@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from AppCoder.forms import CursoFormulario
 from AppCoder.models import Curso
 
@@ -36,7 +36,7 @@ def cursoFormulario(request):
         if miFormulario.is_valid: #si paso la validacion de django
 
             informacion = miFormulario.cleaned_data
-
+            
             curso = Curso (nombre=informacion['curso'], camada=informacion['camada'])
 
             curso.save()
