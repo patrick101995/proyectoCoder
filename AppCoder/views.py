@@ -28,19 +28,20 @@ def entregables(request):
 
 def cursoFormulario(request):
 
-    miFormulario = CursoFormulario(request.POST) #aqui me llega toda la informacion del html
+    if request.method == 'POST':
+        miFormulario = CursoFormulario(request.POST) #aqui me llega toda la informacion del html
 
-    print(miFormulario)
+        print(miFormulario)
 
-    if miFormulario.is_valid: #si paso la validacion de django
+        if miFormulario.is_valid: #si paso la validacion de django
 
-        informacion = miFormulario.cleaned_data
-        
-        curso = Curso (nombre=informacion['curso'], camada=informacion['camada'])
+            informacion = miFormulario.cleaned_data
 
-        curso.save()
+            curso = Curso (nombre=informacion['curso'], camada=informacion['camada'])
 
-        return render(request, "AppCoder/inicio.html") #vuelvo al inicio o a donde necesite
+            curso.save()
+
+            return render(request, "AppCoder/inicio.html") #vuelvo al inicio o a donde necesite
 
     else:
 
